@@ -1,20 +1,21 @@
-import React from "react";
-import avatar from "../img/avatar.jpg";
+import React, { useContext } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
 const Navbar = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <span className="logo1">DDD chat</span>
       <div className="user">
-        <img
-          className="avatar-img"
-          src="https://heinoldheating.com/wp-content/uploads/2020/07/IAFOR-Blank-Avatar-Image-1-768x768.jpg"
-          alt=""
-        />
-        <span>Dat Dang</span>
-        <button className="logout"> Logout </button>
+        <img src={currentUser.photoURL} alt="" />
+        <span>{currentUser.displayName}</span>
+        <button onClick={()=>signOut(auth)}>logout</button>
       </div>
     </div>
   );
 };
 
 export default Navbar;
+
