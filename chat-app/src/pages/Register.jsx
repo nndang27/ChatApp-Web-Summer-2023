@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import "./style.css";
+import "./style.scss";
 import icon from "../img/icon.png";
+import upload_file from "../img/upload_file.png";
+import continue_img from "../img/continue.png";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -16,7 +18,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { storage } from "../firebase";
 import { db } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
-
+import logo from "../img/logo.png";
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ const Register = () => {
     const displayName = event.target[0].value;
     const email = event.target[1].value;
     const password = event.target[2].value;
-    const file = event.target[3].files[0];
+    const file = event.target[4].files[0];
 
     try {
       //Create user
@@ -71,24 +73,39 @@ const Register = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
-        <span className="logo">DDD Chat</span>
-        <span className="title">Register</span>
-        <form action="" className="form" onSubmit={handleSubmit}>
-          <input type="text" placeholder="display name" />
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
-          <input type="file" style={{ display: "none" }} id="file" />
-          <label htmlFor="file">
-            <img src={icon} alt="" /> <span>Upload your avatar here</span>
-          </label>
-          <button className="button">Sign Up</button>
-          <p>
-            You have already had an account?<Link to="/login">Log in</Link>{" "}
-          </p>
-          {err && <span>Something went wrong</span>}
-        </form>
+    <div className="loginPage">
+      <div className="container">
+        <div className="welcomeSection">
+          <div className="header">
+            <img src={logo} alt="" srcset="" />
+            <span> DDD Chat</span>
+          </div>
+          <div className="content">
+            <div className="title">Hãy chat theo cách của bạn</div>
+            {/* <div className="subtitle">sign in to continue access app</div> */}
+          </div>
+        </div>
+        <div className="formWrapper">
+          <span className="title">Register</span>
+          <form action="" className="form" onSubmit={handleSubmit}>
+            <input type="text" placeholder="display name" />
+            <input type="email" placeholder="email" />
+            <input type="password" placeholder="password" />
+            <input type="password" placeholder="confirm your password" />
+            <input type="file" style={{ display: "none" }} id="file" />
+            <label htmlFor="file">
+              <img src={upload_file} alt="" />{" "}
+              <span>Upload your avatar here</span>
+            </label>
+            <button className="button">
+              Sign Up <img src={continue_img} alt="" srcset="" />
+            </button>
+            <p>
+              You have already had an account? <Link to="/login">Log in</Link>{" "}
+            </p>
+            {err && <span>Something went wrong</span>}
+          </form>
+        </div>
       </div>
     </div>
   );
