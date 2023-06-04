@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { useRef } from "react";
 import { AuthContext } from "./context/AuthContext";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

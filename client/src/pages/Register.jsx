@@ -19,6 +19,7 @@ import { storage } from "../firebase";
 import { db } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../img/logo.png";
+
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,10 @@ const Register = () => {
     const email = event.target[1].value;
     const password = event.target[2].value;
     const file = event.target[4].files[0];
-
+    
+    // if (file == null) {
+      
+    // }
     try {
       //Create user
       const auth = getAuth();

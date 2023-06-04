@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
-// import Img from "../img/img.png";
+import addreaction from "../img/add_reaction.png";
+import send from "../img/send.png";
+import addImg from "../img/imagesmode.png";
 // import Attach from "../img/attach.png";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -75,6 +77,10 @@ const Input = () => {
   };
   return (
     <div className="input">
+      {/* <button className="sendBtn" onClick={handleSend}>
+        Send
+      </button> */}
+      <img src={send} alt="" onClick={handleSend} className="sendContent" />
       <input
         type="text"
         placeholder="Type something..."
@@ -82,6 +88,8 @@ const Input = () => {
         value={text}
       />
       <div className="send">
+        <img src={addreaction} alt="" />
+        <img src={addImg} alt="" />
         {/* <img src={Attach} alt="" />
         <input
           type="file"
@@ -92,7 +100,6 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label> */}
-        <button className="sendBtn" onClick={handleSend}>Send</button>
       </div>
     </div>
   );
