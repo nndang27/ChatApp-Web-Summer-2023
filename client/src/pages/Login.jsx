@@ -8,6 +8,7 @@ import logo from "../img/logo.png";
 import facebook from "../img/facebook.png";
 import google from "../img/google.png";
 import continue_img from "../img/continue.png";
+import { socket } from "../socket";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -19,6 +20,7 @@ const Login = () => {
     const password = event.target[1].value;
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      socket.connect();
       navigate("/");
     } catch (error) {
       setErr(true);

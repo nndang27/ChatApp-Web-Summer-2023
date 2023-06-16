@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 
 dotenv.config({ path: "./config.env" });
 
@@ -21,8 +21,11 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   console.log(socket.id);
+  
+  socket.on("disconnect", (reason) => {
+    console.log(reason);
+  });
 });
-
 
 httpServer.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);

@@ -24,6 +24,7 @@ const Messages = () => {
     <div className="messages">
       {messages.map((m) => (
         <Message message={m} key={m.id} />
+        // <Message message="hello" key="123" />
       ))}
     </div>
   );

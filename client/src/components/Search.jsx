@@ -14,10 +14,12 @@ import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import search from "../img/search.png";
 
-
 const Search = () => {
+  // const { currentUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [userYou, setUserYou] = useState(null);
+
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
@@ -31,7 +33,11 @@ const Search = () => {
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        setUser(doc.data());
+        if (doc.data().uid == currentUser.uid) {
+          setUserYou(doc.data());
+        } else {
+          setUser(doc.data());
+        }
       });
     } catch (err) {
       setErr(true);
@@ -44,6 +50,7 @@ const Search = () => {
 
   const handleSelect = async () => {
     //check whether the group(chats in firestore) exists, if not create
+    setUserYou(false);
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
@@ -97,6 +104,17 @@ const Search = () => {
           <img src={user.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{user.displayName}</span>
+          </div>
+        </div>
+      )}
+      {userYou && (
+        <div
+          className="userChat"
+          // onClick={alert("cannot send message to yourself")}
+        >
+          <img src={userYou.photoURL} alt="" />
+          <div className="userChatInfo">
+            <span>{userYou.displayName} (you)</span>
           </div>
         </div>
       )}
