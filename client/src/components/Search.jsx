@@ -14,12 +14,13 @@ import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import search from "../img/search.png";
 
+
+
 const Search = () => {
   // const { currentUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [userYou, setUserYou] = useState(null);
-
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
@@ -123,3 +124,4 @@ const Search = () => {
 };
 
 export default Search;
+
