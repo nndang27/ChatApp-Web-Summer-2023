@@ -1,15 +1,15 @@
 @mixin mobile {
-  @media screen and (max-width: 480px) {
-    @content;
-  }
-}
-@mixin tablet {
   @media screen and (max-width: 768px) {
     @content;
   }
 }
+@mixin tablet {
+  @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
 @mixin laptop {
-  @media screen and (max-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     @content;
   }
 }
@@ -496,6 +496,74 @@
 
         .form {
           margin-top: -32px;
+          gap: 25px;
+
+          input, .button {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include tablet() {
+  .loginPage {
+    justify-content: center;
+    display: flex;
+    width: auto;
+    height: 100vh;
+    
+    .container {
+      background: #fff;
+      display: grid;
+      width: 90%;
+      height: 90%;
+      margin-left: auto;
+      margin-right: auto;
+
+      .welcomeSection {
+        display: block;
+        width: 100%;
+        height: 55%;
+
+        .header {
+          margin-bottom: 15px;
+
+          span {
+            font-size: 3rem;
+          }
+        }
+
+        .content {
+          margin-bottom: 0;
+
+          .title {
+            font-size: 28px;
+            margin-bottom: 12px;
+          }
+
+          .subtitle {
+            font-size: 22px;
+          }
+        }
+      }
+
+      .formWrapper{
+        display: block;
+        width: 100%;
+        padding: 0;
+
+        .title {
+          margin-left: 42%;
+          font-size: 32px;
+          position: relative;
+          top: -150px;
+
+        }
+
+        .form {
+          margin-top: -102px;
           gap: 25px;
 
           input, .button {
