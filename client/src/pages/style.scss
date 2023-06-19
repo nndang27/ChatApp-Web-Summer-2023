@@ -444,3 +444,65 @@
     }
   }
 }
+
+@include mobile {
+  .loginPage {
+    display: block;
+    width: auto;
+    height: 100vh;
+    
+    .container {
+      background: #fff;
+      display: grid;
+      width: 100%;
+      height: 100%;
+      box-shadow: none;
+      border-radius: 0;
+
+      .welcomeSection {
+        display: block;
+        width: 100%;
+        height: 70%;
+
+        .header {
+          margin-bottom: 15px;
+        }
+
+        .content {
+          margin-bottom: 0;
+
+          .title {
+            font-size: 24px;
+          }
+
+          .subtitle {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .formWrapper{
+        display: block;
+        width: 100%;
+        padding: 0;
+
+        .title {
+          margin-left: 36%;
+          font-size: 32px;
+          position: relative;
+          top: -60px;
+
+        }
+
+        .form {
+          margin-top: -32px;
+          gap: 25px;
+
+          input, .button {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
