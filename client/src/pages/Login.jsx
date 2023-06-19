@@ -56,7 +56,7 @@ const Login = () => {
               <img src={google} alt="" srcset="" />
             </div>
           </form>
-          {err && <span>Something went wrong</span>}
+          {err && <span>Your email or password is incorrect</span>}
         </div>
       </div>
     </div>
