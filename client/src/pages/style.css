@@ -55,14 +55,6 @@ img {
   font-weight: bold;
 }
 
-.home {
-  background-color: #f0f2f5;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .container {
   border: 1px solid white;
   border-radius: 8px;
