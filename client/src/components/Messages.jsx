@@ -10,6 +10,7 @@ const Messages = () => {
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+      const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
       doc.exists() && setMessages(doc.data().messages);
     });
 

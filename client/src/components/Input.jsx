@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import addreaction from "../img/add_reaction.png";
 import send from "../img/send.png";
 import addImg from "../img/imagesmode.png";
-// import Attach from "../img/attach.png";
+// import ImageCompressor from "image-compressor";
+// import Compressor from "compressorjs";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -24,21 +25,34 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    let sendText = text.trim();
+    setText("");
+    // let sendText = text;
+    if (!img && sendText == "") {
+      return;
+    }
     if (img) {
+      // let compressedImage = compressImage(img);
       const storageRef = ref(storage, uuid());
 
       const uploadTask = uploadBytesResumable(storageRef, img);
-
+      setImg(null);
       uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Handle upload progress here
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
         (error) => {
-          //TODO:Handle Error
+          console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
-                text,
+                text: sendText,
                 senderId: currentUser.uid,
                 date: Timestamp.now(),
                 img: downloadURL,
@@ -51,7 +65,7 @@ const Input = () => {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
-          text,
+          text: sendText,
           senderId: currentUser.uid,
           date: Timestamp.now(),
         }),
@@ -75,11 +89,9 @@ const Input = () => {
     setText("");
     setImg(null);
   };
+
   return (
     <div className="input">
-      {/* <button className="sendBtn" onClick={handleSend}>
-        Send
-      </button> */}
       <img src={send} alt="" onClick={handleSend} className="sendContent" />
       <input
         type="text"
@@ -89,17 +101,16 @@ const Input = () => {
       />
       <div className="send">
         <img src={addreaction} alt="" />
-        <img src={addImg} alt="" />
-        {/* <img src={Attach} alt="" />
         <input
           type="file"
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
+          accept="image/*"
         />
         <label htmlFor="file">
-          <img src={Img} alt="" />
-        </label> */}
+          <img src={addImg} alt="" />
+        </label>
       </div>
     </div>
   );
