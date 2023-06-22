@@ -9,8 +9,30 @@ import facebook from "../img/facebook.png";
 import google from "../img/google.png";
 import continue_img from "../img/continue.png";
 import { socket } from "../socket";
+import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+  const signInWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((re) => {
+      console.log(re);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+  }
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((re) => {
+      console.log(re);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+  }
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -52,8 +74,12 @@ const Login = () => {
             </p>
             <p>Or sign in with</p>
             <div className="methodLogin">
-              <img src={facebook} alt="" srcset="" />
-              <img src={google} alt="" srcset="" />
+              <button className="loginfb" onClick={signInWithFacebook}>
+                <img src={facebook} alt="" srcset="" />
+              </button>
+              <button className="logingg" onClick={signInWithGoogle}>
+                <img src={google} alt="" srcset="" />
+              </button>
             </div>
           </form>
           {err && <span>Your email or password is incorrect</span>}

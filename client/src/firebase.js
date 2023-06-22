@@ -11,7 +11,7 @@ const firebaseConfig = {
   storageBucket: "fir-learning-25dbc.appspot.com",
   messagingSenderId: "624789124397",
   appId: "1:624789124397:web:e4d1f30f175ef050430fa4",
-  measurementId: "G-B8Q6JED3ZW",
+  measurementId: "G-B8Q6JED3ZW"
 };
 
 // Initialize Firebase
@@ -19,4 +19,4 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const storage = getStorage();
 export const db = getFirestore();
-export const auth = getAuth();
+export const auth = getAuth(app);
