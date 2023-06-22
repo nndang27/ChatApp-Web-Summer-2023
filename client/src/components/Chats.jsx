@@ -3,16 +3,23 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
-
+import { socket } from "../socket";
 const Chats = () => {
   const [chats, setChats] = useState([]);
   const [receiverInfo, setReceiverInfo] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
+  // socket.on("onlineUsers", (onlineUsers) => {
+  //   onlineUsers.forEach((user) => {
+  //     let obj = chats.find((x) => x.userInfo.uid == user.userID);
+  //     if (obj !== -1) {
+  //       x.userInfo.status = "online";
+  //     }
+  //   });
+  // });
 
   useEffect(() => {
-    
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
@@ -43,7 +50,8 @@ const Chats = () => {
             <img src={chat[1].userInfo.photoURL} alt="" />
             <div className="userChatInfo">
               <span>{chat[1].userInfo.displayName}</span>
-              <p>{chat[1].lastMessage?.text}</p>
+              {chat[1].lastMessage?.text && <p>{chat[1].lastMessage?.text}</p>}
+              {!chat[1].lastMessage?.text && <p>Sent a file </p>}
             </div>
           </div>
         ))}

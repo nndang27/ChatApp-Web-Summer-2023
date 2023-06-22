@@ -11,19 +11,46 @@ const app = express();
 
 const httpServer = createServer(app);
 
-const onlineUsers = [];
-
 const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
 
+const onlineUsers = [];
+
 io.on("connection", (socket) => {
   console.log(socket.id);
-  
+  let currentUser = {};
+  socket.on("setUp", (userID, username) => {
+    if (userID != null || username != null) {
+      console.log(userID + " : " + username);
+      const existingUserIndex = onlineUsers.findIndex((x) => x.uid === userID);
+      if (existingUserIndex !== -1) {
+        onlineUsers[existingUserIndex] = { userID, username };
+      } else {
+        currentUser = {
+          id: socket.id,
+          username: username,
+          uid: userID,
+        };
+        onlineUsers.push(currentUser);
+        console.log("User added:", onlineUsers[onlineUsers.length - 1]);
+      }
+      console.log("Online Users:", onlineUsers);
+      io.emit("onlineUsers", onlineUsers);
+    }
+  });
+
   socket.on("disconnect", (reason) => {
     console.log(reason);
+
+    const disconnectedUser = onlineUsers.find((x) => x.uid == currentUser.uid);
+    if (disconnectedUser !== -1) {
+      onlineUsers.splice(onlineUsers.indexOf(disconnectedUser), 1);
+      console.log("Online Users:", onlineUsers);
+      io.emit("onlineUsers", onlineUsers);
+    }
   });
 });
 

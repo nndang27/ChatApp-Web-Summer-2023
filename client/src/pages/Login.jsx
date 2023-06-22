@@ -14,13 +14,14 @@ const Login = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target[0].value;
     const password = event.target[1].value;
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      socket.connect();
+      // socket.connect();
       navigate("/");
     } catch (error) {
       setErr(true);
