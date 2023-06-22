@@ -38,6 +38,12 @@ const Input = () => {
       const uploadTask = uploadBytesResumable(storageRef, img);
       setImg(null);
       uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Handle upload progress here
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
         (error) => {
           console.log(error);
         },
