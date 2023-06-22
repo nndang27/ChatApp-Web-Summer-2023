@@ -1,5 +1,5 @@
 import React from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import "./style.scss";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,7 +16,7 @@ const Login = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
     .then((re) => {
-      console.log(re);
+      console.log(user);
     })
     .catch((err) => {
       console.log(err.message);
@@ -27,7 +27,11 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
     .then((re) => {
-      console.log(re);
+      console.log(auth.currentUser.email);
+      createUserWithEmailAndPassword(auth, auth.email, 1);
+      signInWithEmailAndPassword(auth, auth.email, 1);
+      socket.connect();
+      navigate("/");
     })
     .catch((err) => {
       console.log(err.message);
