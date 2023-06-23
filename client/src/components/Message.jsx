@@ -18,10 +18,15 @@ const Message = ({ message }) => {
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
     >
       <div className="messageInfo">
-        <span>{message.date.toDate().toUTCString()}</span>
       </div>
       <div className="messageContent">
-        <p>{message.text}</p>
+        <p
+          data-toggle="tooltip"
+          data-placement="top"
+          title={message.date.toDate().toUTCString()}
+        >
+          {message.text}
+        </p>
         {message.img && <img src={message.img} alt="" />}
       </div>
     </div>

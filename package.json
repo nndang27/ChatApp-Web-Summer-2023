@@ -1,0 +1,6 @@
+{
+  "name": "chat-app-2023",
+  "scripts": {
+    "start": "cd client && npm start && cd ../server && npm run dev"
+  }
+}

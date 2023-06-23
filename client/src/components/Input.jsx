@@ -16,6 +16,7 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { socket } from "../socket";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -24,11 +25,24 @@ const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSend();
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setImg(event.target.files[0]);
+  };
+
   const handleSend = async () => {
     let sendText = text.trim();
     setText("");
     // let sendText = text;
     if (!img && sendText == "") {
+      return;
+    }
+    if (data.user.uid == null) {
       return;
     }
     if (img) {
@@ -38,10 +52,11 @@ const Input = () => {
       const uploadTask = uploadBytesResumable(storageRef, img);
       setImg(null);
       uploadTask.on(
-        'state_changed',
+        "state_changed",
         (snapshot) => {
           // Handle upload progress here
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(`Upload is ${progress}% done`);
         },
         (error) => {
@@ -86,6 +101,11 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
+    socket.emit("sendMessage", {
+      receiverUserID: data.user.uid,
+      senderID: currentUser.uid,
+    });
+
     setText("");
     setImg(null);
   };
@@ -98,6 +118,7 @@ const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyDown={handleKeyPress}
       />
       <div className="send">
         <img src={addreaction} alt="" />
@@ -105,7 +126,7 @@ const Input = () => {
           type="file"
           style={{ display: "none" }}
           id="file"
-          onChange={(e) => setImg(e.target.files[0])}
+          onChange={handleFileChange}
           accept="image/*"
         />
         <label htmlFor="file">

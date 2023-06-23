@@ -44,6 +44,7 @@ const Login = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target[0].value;

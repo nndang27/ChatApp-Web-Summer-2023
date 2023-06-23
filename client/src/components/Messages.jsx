@@ -10,22 +10,17 @@ const Messages = () => {
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
-      const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
       doc.exists() && setMessages(doc.data().messages);
     });
-
     return () => {
       unSub();
     };
   }, [data.chatId]);
 
-  console.log(messages);
-
   return (
     <div className="messages">
       {messages.map((m) => (
         <Message message={m} key={m.id} />
-        // <Message message="hello" key="123" />
       ))}
     </div>
   );
