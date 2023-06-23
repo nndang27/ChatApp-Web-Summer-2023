@@ -16,7 +16,11 @@ const Login = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
     .then((re) => {
-      console.log(user);
+      console.log(auth.currentUser.email);
+      createUserWithEmailAndPassword(auth, auth.currentUser.email, 1);
+      signInWithEmailAndPassword(auth, auth.currentUser.email, 1);
+      socket.connect();
+      navigate("/");
     })
     .catch((err) => {
       console.log(err.message);
@@ -28,13 +32,13 @@ const Login = () => {
     signInWithPopup(auth, provider)
     .then((re) => {
       console.log(auth.currentUser.email);
-      createUserWithEmailAndPassword(auth, auth.email, 1);
-      signInWithEmailAndPassword(auth, auth.email, 1);
+      createUserWithEmailAndPassword(auth, auth.currentUser.email, auth.currentUser.password);
+      signInWithEmailAndPassword(auth, auth.currentUser.email, auth.currentUser.password);
       socket.connect();
       navigate("/");
     })
     .catch((err) => {
-      console.log(err.message);
+    
     })
   }
   const [err, setErr] = useState(false);
