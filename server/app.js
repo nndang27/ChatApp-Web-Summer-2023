@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./config.env" });
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 
@@ -60,5 +60,5 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`);
+  console.log(`LLLLListening on http://localhost:${PORT}`);
 });

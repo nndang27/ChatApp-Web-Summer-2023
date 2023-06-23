@@ -15,7 +15,7 @@ const __dirname = path.resolve()
 import { Server } from 'socket.io'
 import mediasoup from 'mediasoup'
 import bodyParser from 'body-parser'
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3006
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res, next) => {
   const path2 = '/sfu/'

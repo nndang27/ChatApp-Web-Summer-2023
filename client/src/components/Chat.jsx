@@ -21,7 +21,7 @@ const Chat = () => {
     const client_name = data.user.displayName
     // socket.emit("send_username",host)
 
-    const redirectURL = `http://127.0.0.1:4000/sfu/${roomID}/${host}`;
+    const redirectURL = `http://127.0.0.1:3006/sfu/${roomID}/${host}`;
     window.open(`${redirectURL}`, '_blank','width=800,height=600');
   };
 
