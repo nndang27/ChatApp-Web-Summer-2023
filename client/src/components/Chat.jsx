@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import "../pages/style.css";
 import Cam from "../img/video_call.png";
-
+import online from "../img/available.png";
+import offline from "../img/unavailable.png";
 import Messages from "./Messages";
 import search from "../img/search.png";
 import more from "../img/more_vert.png";
@@ -25,7 +26,7 @@ const Chat = () => {
     <div className="chat">
       <div className="chatInfoBox">
         {data.user.uid && (
-          <div class="chatInfo" >
+          <div class="chatInfo">
             <div className="receiverInfo">
               <img src={data.user?.photoURL} alt="" />
               <span>{data.user?.displayName}</span>
