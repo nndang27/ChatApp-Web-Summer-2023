@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
         onlineUsers[existingUserIndex] = { userID, username };
       } else {
         currentUser = {
-          id: socket.id,
+          socketID: socket.id,
           username: username,
           uid: userID,
         };

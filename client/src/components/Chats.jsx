@@ -10,14 +10,9 @@ const Chats = () => {
 
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
-  // socket.on("onlineUsers", (onlineUsers) => {
-  //   onlineUsers.forEach((user) => {
-  //     let obj = chats.find((x) => x.userInfo.uid == user.userID);
-  //     if (obj !== -1) {
-  //       x.userInfo.status = "online";
-  //     }
-  //   });
-  // });
+  socket.on("onlineUsers", (onlineUsers) => {
+    console.log(onlineUsers);
+  });
 
   useEffect(() => {
     const getChats = () => {
