@@ -16,10 +16,13 @@ const Chat = () => {
   const roomId = data.chatId;
 
   const handleSelect = async () => {
-    console.log(roomId);
-    console.log(currentUser.uid);
-    console.log(currentUser.displayName);
-    console.log(data.user.uid);
+    const roomID = data.chatId
+    const host = currentUser.displayName
+    const client_name = data.user.displayName
+    // socket.emit("send_username",host)
+
+    const redirectURL = `http://127.0.0.1:4000/sfu/${roomID}/${host}`;
+    window.open(`${redirectURL}`, '_blank','width=800,height=600');
   };
 
   return (

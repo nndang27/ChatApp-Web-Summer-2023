@@ -1,6 +1,35 @@
 {
-  "name": "chat-app-2023",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.0",
+    "express": "^4.18.2",
+    "httpolyglot": "^0.1.2",
+    "mediasoup": "^3.11.24",
+    "mediasoup-client": "^3.6.84",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "watch": "^1.0.2",
+    "watchify": "^4.0.0"
+  },
+  "name": "mediasoup",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "cd client && npm start && cd ../server && npm run dev"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"nodemon app.js\" \"cd ./client && npm start\" \"cd ./server && npm rundev\"",
+    "watch": "watchify public/index.js -o public/bundle.js -v"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "nodemon": "^2.0.22"
+  },
+  "description": ""
 }

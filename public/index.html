@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+    <body>
+
+        <div class="largeScreen">
+
+        </div>
+        
+        <div id="localColumn" class="localColumn">
+            <!-- <audio id="localAudio" autoplay class="audio"></audio> -->
+
+            <video id="localVideo" autoplay class="video" playsinline ></video>
+            
+            <div id="ShareScreen" class="ShareScreen"></div>
+            
+        </div>
+        <div id="controls">
+
+            <div class="control-container" id="btnLocalVideo">
+                <img src="./icons/camera.png" />
+            </div>
+    
+            <div class="control-container" id="btnLocalAudio">
+                <img src="./icons/mic.png" />
+            </div>
+    
+            <div class="control-container" id="btnLocalScreen">
+                <img src="./icons/share_screen.png" />
+            </div>
+
+            <div class="control-container" id="leave-btn">
+                <img src="./icons/phone.png" />
+            </div>
+    
+        </div>
+
+
+        <div id="videoContainer" class="videoContainer_state2">
+            <!-- <button id="change_size">gallery</button> -->
+            <div id="change_size">
+                <img src="./icons/hambuger.jpg" />
+            </div>
+
+        </div>
+
+
+        
+
+        <div class="participantsColumn">
+            <div id="move_to_chat">
+                <img src="./icons/chat_button.jpg" />
+            </div>
+            <div id="participants"></div>
+        </div>
+        
+        <div class="chatColumn">
+            <div id="move_to_participant">
+                <img src="./icons/participant_button.jpg" />
+            </div>
+            <div id="chat_box"> </div>
+            <form id="message_form">
+                <input id="input" type="text" name="message" placeholder="Send a message....">
+                <!-- <input type="file" id="myfile" name="myfile"><br><br> -->
+                <button><div id="send_msg"><img src="./icons/send_msg.png" /></div></button>
+            </form>
+        </div>
+        <!-- <div class="chat">
+            
+        </div> -->
+    </body>
+
+  <footer>
+      <script src="bundle.js"></script>
+  </footer>
+</html>
+
+
