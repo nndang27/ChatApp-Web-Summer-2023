@@ -16,9 +16,9 @@ const Login = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
     .then((re) => {
-      console.log(auth.currentUser.email);
-      createUserWithEmailAndPassword(auth, auth.currentUser.email, 1);
-      signInWithEmailAndPassword(auth, auth.currentUser.email, 1);
+      console.log(auth.currentUser);
+      createUserWithEmailAndPassword(auth, auth.currentUser.email, auth.currentUser.password);
+      signInWithEmailAndPassword(auth, auth.currentUser.email, auth.currentUser.password);
       socket.connect();
       navigate("/");
     })
