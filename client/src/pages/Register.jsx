@@ -142,7 +142,7 @@ const Register = () => {
             <p>
               You have already had an account? <Link to="/login">Log in</Link>{" "}
             </p>
-            {err && <span>Something went wrong</span>}
+            {err && <span>Something wrong!</span>}
           </form>
         </div>
       </div>

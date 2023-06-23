@@ -4,6 +4,8 @@ import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 import { socket } from "../socket";
+import online from "../img/available.png";
+import offline from "../img/unavailable.png";
 const Chats = () => {
   // const [receiverInfo, setReceiverInfo] = useState(null);
   const { currentUser } = useContext(AuthContext);
@@ -55,12 +57,12 @@ const Chats = () => {
             onClick={() => handleSelect(chat[1].userInfo)}
           >
             <img src={chat[1].userInfo.photoURL} alt="" />
+            {onlineUser.findIndex((o) => o.userID === chat[1].userInfo.uid) ===
+              -1 && <img className="statusIcon" src={offline} alt="offline" />}
+            {onlineUser.findIndex((o) => o.userID === chat[1].userInfo.uid) !==
+              -1 && <img className="statusIcon" src={online} alt="online" />}
             <div className="userChatInfo">
               <span>{chat[1].userInfo.displayName}</span>
-              {onlineUser.findIndex((o) => o.userID === chat[1].userInfo.uid) ===
-                -1 && <a>offline</a>}
-              {onlineUser.findIndex((o) => o.userID === chat[1].userInfo.uid) !==
-                -1 && <a>online</a>}
 
               {chat[1].lastMessage?.text && <p>{chat[1].lastMessage?.text}</p>}
 
