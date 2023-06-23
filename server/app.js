@@ -42,6 +42,11 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("sendMessage", ({ receiverUserID, senderID }) => {
+    console.log("hi");
+    io.emit("messageNoti");
+  });
+
   socket.on("disconnect", (reason) => {
     console.log(reason);
 

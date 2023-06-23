@@ -16,6 +16,7 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { socket } from "../socket";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -39,6 +40,9 @@ const Input = () => {
     setText("");
     // let sendText = text;
     if (!img && sendText == "") {
+      return;
+    }
+    if (data.user.uid == null) {
       return;
     }
     if (img) {
@@ -95,6 +99,11 @@ const Input = () => {
         text,
       },
       [data.chatId + ".date"]: serverTimestamp(),
+    });
+
+    socket.emit("sendMessage", {
+      receiverUserID: data.user.uid,
+      senderID: currentUser.uid,
     });
 
     setText("");

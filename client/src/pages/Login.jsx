@@ -21,7 +21,7 @@ const Login = () => {
     const password = event.target[1].value;
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // socket.connect();
+      socket.connect();
       navigate("/");
     } catch (error) {
       setErr(true);

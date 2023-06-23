@@ -9,16 +9,18 @@ import { AuthContext } from "./context/AuthContext";
 import React, { useState, useEffect } from "react";
 import { socket } from "./socket";
 
+
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   if (currentUser) {
     socket.connect();
     socket.emit("setUp", currentUser.uid, currentUser.displayName);
   }
+  
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
