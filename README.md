@@ -5,7 +5,7 @@ ChatApp project for WebCourse Summer 2023
 More detail about the website, please read the report
 
 If you using Window, run the Docker file:
-- docker build -t chat .
+- docker build -t ubuntu .
 - docker-compose up -d
   
 Run the project:
