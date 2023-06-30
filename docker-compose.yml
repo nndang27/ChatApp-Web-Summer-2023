@@ -1,0 +1,12 @@
+version: '3'
+services:
+  linux:
+    container_name: "ubuntu-linux"
+    image: "ubuntu"
+    restart: "always"
+    tty: true
+    ports:
+      - "3000:3000"
+      - "2000-2020:2000-2020"
+    volumes:
+      - ./example1:/usr/code
